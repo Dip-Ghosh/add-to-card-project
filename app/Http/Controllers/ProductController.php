@@ -41,14 +41,12 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success','Produt Created Successfully');
     }
 
-
     public function edit($id)
     {
         $categories = $this->category->getAllActiveCategory();
         $product = $this->product->edit($id);
         return view('backend.product.edit',compact('product','categories'));
     }
-
 
     public function update(ProductValidationRequest $request, $id)
     {
@@ -58,11 +56,12 @@ class ProductController extends Controller
         return redirect()->route('products.index') ->with('success','Category Updated Successfully');
     }
 
-
     public function destroy($id)
     {
         $this->product->delete($id);
         return redirect()->back() ->with('success','Product Deleted Successfully');
     }
+
+
 
 }

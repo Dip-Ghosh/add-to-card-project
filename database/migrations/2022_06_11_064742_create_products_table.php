@@ -21,7 +21,6 @@ return new class extends Migration
             $table->longText('description');
             $table->float('price');
             $table->string("image", 255)->nullable();
-            $table->enum('status',['active','Inactive'])->defaultValue('active');
             $table->timestamps();
         });
     }

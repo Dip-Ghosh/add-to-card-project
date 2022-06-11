@@ -15,11 +15,8 @@ $namespace ='App\Http\Controllers';
 */
 
 Route::get('/',$namespace.'\HomeController@index');
+Route::get('details/{id}',$namespace.'\HomeController@getProdcutDetails')->name('products.details');
 
-
-//Route::get('/products/details',function () {
-//    return view('products.product-details');
-//});
 
 Route::resource('category',$namespace.'\CategoryController');
 Route::resource('products',$namespace.'\ProductController');

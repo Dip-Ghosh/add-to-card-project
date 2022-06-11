@@ -9,7 +9,7 @@
                         @foreach($categories as $category)
                             <li class="dropdown menu-item"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                         class="icon fa fa-envira"></i>{{ $category->name }}</a></li>
-                            @endforeach
+                        @endforeach
 
                     @else
                         <li> No record Found</li>
@@ -105,107 +105,67 @@
         </div>
 
         <div id="product-tabs-slider" class="scroll-tabs outer-top-vs">
-            <div class="more-info-tab clearfix ">
-                <h3 class="new-product-title pull-left">Category One</h3>
-            </div>
-            <div class="tab-content outer-top-xs">
-                <div class="tab-pane in active" id="all">
-                    <div class="product-slider">
-                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
-                            <!-- Item Section -->
-                            <div class="item item-carousel">
-                                <div class="products">
-                                    <div class="product">
-                                        <div class="product-image">
-                                            <div class="image">
-                                                <a href="detail.html">
-                                                    <img src="assets/images/products/p1.jpg" alt="">
-                                                    <img src="assets/images/products/p1_hover.jpg" alt=""
-                                                         class="hover-image">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-info text-left">
-                                            <h3 class="name"><a href="{{ url('/products/details') }}">Floral Print Buttoned</a></h3>
-                                            <div class="rating rateit-small"></div>
-                                            <div class="description"></div>
-                                            <div class="product-price"><span class="price"> $450.99 </span> <span
-                                                    class="price-before-discount">$ 800</span></div>
-                                        </div>
-                                        <div class="cart clearfix animate-effect">
-                                            <div class="action">
-                                                <ul class="list-unstyled">
-                                                    <li class="add-cart-button btn-group">
-                                                        <button data-toggle="tooltip" class="btn btn-primary icon"
-                                                                type="button" title="Add Cart"><i
-                                                                class="fa fa-shopping-cart"></i></button>
-                                                        <button class="btn btn-primary cart-btn" type="button">Add to
-                                                            cart
-                                                        </button>
-                                                    </li>
-                                                </ul>
+
+            @foreach($data as $key=>$product)
+
+
+                <div class="more-info-tab clearfix ">
+                    <h3 class="new-product-title pull-left">{{ $key }}</h3>
+                </div>
+                <div class="tab-content outer-top-xs">
+                    <div class="tab-pane in active" id="all">
+                        <div class="product-slider">
+                            <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
+
+
+                                @foreach($product as $value)
+
+                                    <div class="item item-carousel">
+                                        <div class="products">
+                                            <div class="product">
+                                                <div class="product-image">
+                                                    <div class="image">
+                                                        <a href="{{ route('products.details',$value->id) }}">
+                                                            <img src="{{asset('uploads/'.$value->image)}}" alt="">
+                                                            <img src="{{asset('uploads/'.$value->image)}}" alt="" class="hover-image">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-info text-left">
+                                                    <h3 class="name"><a href="{{  route('products.details',$value->id) }}">Floral Print
+                                                            Buttoned</a></h3>
+                                                    <div class="rating rateit-small"></div>
+                                                    <div class="description"></div>
+                                                    <div class="product-price"><span class="price"> {{ $value->price }} </span> <span
+                                                            class="price-before-discount">$ 800</span></div>
+                                                </div>
+                                                <div class="cart clearfix animate-effect">
+                                                    <div class="action">
+                                                        <ul class="list-unstyled">
+                                                            <li class="add-cart-button btn-group">
+                                                                <button data-toggle="tooltip" class="btn btn-primary icon"
+                                                                        type="button" title="Add Cart"><i
+                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                <button class="btn btn-primary cart-btn" type="button">Add
+                                                                    to
+                                                                    cart
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
+
+
                             </div>
-                            <!-- Item Section End -->
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
 
-        <div id="product-tabs-slider" class="scroll-tabs outer-top-vs">
-            <div class="more-info-tab clearfix ">
-                <h3 class="new-product-title pull-left">Category Two</h3>
-            </div>
-            <div class="tab-content outer-top-xs">
-                <div class="tab-pane in active" id="all">
-                    <div class="product-slider">
-                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
-                            <!-- Item Section -->
-                            <div class="item item-carousel">
-                                <div class="products">
-                                    <div class="product">
-                                        <div class="product-image">
-                                            <div class="image">
-                                                <a href="{{ url('/products/details') }}">
-                                                    <img src="assets/images/products/p1.jpg" alt="">
-                                                    <img src="assets/images/products/p1_hover.jpg" alt=""
-                                                         class="hover-image">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-info text-left">
-                                            <h3 class="name"><a href="{{ url('/products/details') }}">Floral Print Buttoned</a></h3>
-                                            <div class="rating rateit-small"></div>
-                                            <div class="description"></div>
-                                            <div class="product-price"><span class="price"> $450.99 </span> <span
-                                                    class="price-before-discount">$ 800</span></div>
-                                        </div>
-                                        <div class="cart clearfix animate-effect">
-                                            <div class="action">
-                                                <ul class="list-unstyled">
-                                                    <li class="add-cart-button btn-group">
-                                                        <button data-toggle="tooltip" class="btn btn-primary icon"
-                                                                type="button" title="Add Cart"><i
-                                                                class="fa fa-shopping-cart"></i></button>
-                                                        <button class="btn btn-primary cart-btn" type="button">Add to
-                                                            cart
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Item Section End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
