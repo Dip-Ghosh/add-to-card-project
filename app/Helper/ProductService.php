@@ -14,7 +14,7 @@ class ProductService
             "name" => trim($data['name']),
             "description" =>trim($data['description']),
             "price" => $data['price'],
-            "image" => isset($data['imageName'])?$data['imageName']:null
+            "image" =>$data['imageName']
         ];
 
         if((isset($data['id']) && !empty($data['id']))){

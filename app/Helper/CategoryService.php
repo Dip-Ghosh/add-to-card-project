@@ -9,7 +9,7 @@ class CategoryService
 
     public function prepareData($data)
     {
-        $params['name'] = $data['category'];
+        $params['name'] = trim($data['category']);
         if (isset($data['id']) && !empty($data['id'])) {
             $params['updated_at'] = Carbon::now();
         } else {

@@ -39,7 +39,8 @@ class ProductController extends Controller
 
     public function store(ProductValidationRequest $request)
     {
-        $request->image = $this->imageHelper->checkImage($request->only('image'));
+
+        $request['imageName'] = $this->imageHelper->checkImage($request->only('image'));
         $data = $this->productService->prepareData($request->except('_token'));
 
         $this->product->save($data);
@@ -56,7 +57,8 @@ class ProductController extends Controller
     public function update(ProductValidationRequest $request, $id)
     {
         $request['id'] = $id;
-        $request->image = $this->imageHelper->checkImage($request->only('image'));
+        $request['imageName'] = $this->imageHelper->checkImage($request->only('image','id'));
+
         $data = $this->productService->prepareData($request->except('_token'));
         $this->product->update($id,$data);
         return redirect()->route('products.index') ->with('success','Category Updated Successfully');

@@ -26,7 +26,8 @@ class ProductValidationRequest extends FormRequest
         return [
             'name' => 'required',
             'category_id' =>'required',
-            'price' => 'required'
+            'price' => 'required',
+            'image' => 'required'
         ];
     }
 }

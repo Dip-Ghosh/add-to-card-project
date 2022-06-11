@@ -50,7 +50,8 @@
                                 <td>{{$datum->description}}</td>
                                 <td>{{$datum->price}}</td>
                                 <td>
-                                    <img src="{{(isset($datum->image) && !empty($datum->image))?asset('uploads/'. $datum->image) : asset('uploads/images.png')}}"
+
+                                    <img src="{{(isset($datum->image) && !empty($datum->image))?asset('uploads/'. $datum->image) : asset('uploads/close.png')}}"
                                          width="60px" height="50px" alt="">
                                 </td>
 
