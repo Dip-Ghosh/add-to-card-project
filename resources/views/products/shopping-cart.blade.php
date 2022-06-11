@@ -31,7 +31,7 @@
                                             <td data-id=" {{ $id }}" class="remove-from-cart"><a href="#" title="cancel" class="icon"><i
                                                         class="fa fa-trash-o"></i></a></td>
                                             <td class="cart-image">
-                                                <a class="entry-thumbnail" href="detail.html">
+                                                <a class="entry-thumbnail">
                                                     <img src="{{asset('upload/'.$details['image'])}}" alt="">
                                                 </a>
                                             </td>
@@ -59,7 +59,7 @@
                                                         <div class="arrow minus gradient"><span class="ir"><i
                                                                     class="icon fa fa-sort-desc"></i></span></div>
                                                     </div>
-                                                    <input type="text" value="{{isset($details['quantity']) ? $details['quantity'] : 1 }}">
+                                                    <input data-id="{{ $id }}" class="update-cart" type="text" value="{{isset($details['quantity']) ? $details['quantity'] : 1 }}">
                                                 </div>
                                             </td>
                                             <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ $details['price'] * $details['quantity'] }}</span>
@@ -299,6 +299,7 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+
         $(".remove-from-cart").click(function (e) {
             e.preventDefault();
 
@@ -317,6 +318,27 @@
                     }
                 });
             }
+        });
+
+
+        $(".update-cart").change(function (e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+            var qty = $(this).val();
+
+            $.ajax({
+                url: '{{ route('update.cart') }}',
+                method: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id,
+                    quantity: qty
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
         });
     </script>
 @endsection

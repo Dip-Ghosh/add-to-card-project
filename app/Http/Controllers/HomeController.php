@@ -56,13 +56,11 @@ class HomeController extends Controller
         $this->homeService->addItemToCart($product,$id);
     }
 
-    public function update(Request $request)
+    public function updateToCart(Request $request)
     {
         if($request->id && $request->quantity){
-            $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
-            session()->flash('success', 'Cart updated successfully');
+
+            $this->homeService->updateToCart($request);
         }
     }
 
@@ -72,7 +70,6 @@ class HomeController extends Controller
             $this->homeService->removeItemFromCart($request);
         }
     }
-
 
     public function register(){
 
