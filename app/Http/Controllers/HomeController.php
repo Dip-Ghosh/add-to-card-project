@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index(){
 
         $data = [];
-        $categories = $this->category->getAllActiveCategory();
+        $categories = $this->category->getActiveCategory();
         $products = $this->product->getActiveProducts();
 
         foreach($products as $val){

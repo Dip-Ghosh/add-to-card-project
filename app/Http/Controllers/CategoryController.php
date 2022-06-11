@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\CategoryService;
 use App\Http\Requests\CategoryValidationRequest;
 use App\Repository\Category\CategoryInterface;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    protected $category;
+    protected $categoryService;
 
-    public function __construct( CategoryInterface $category){
+    public function __construct( CategoryInterface $category,CategoryService $categoryService ){
 
         $this->category = $category;
+        $this->categoryService = $categoryService;
     }
 
     public function index(){
 
-        $categories = $this->category->getAllActiveCategory();
+        $categories = $this->category->getActiveCategory();
         return view('backend.category.list',compact('categories'));
     }
 
@@ -29,32 +29,23 @@ class CategoryController extends Controller
 
     public function store(CategoryValidationRequest $request)
     {
-        $data = [
-            'name'=>$request->category,
-            'created_at'=>Carbon::now()
-        ];
-
+        $data = $this->categoryService->prepareData($request->except('_token'));
         $this->category->save($data);
-
         return redirect()->route('category.index')->with('success','Category Created Successfully');
     }
 
 
     public function edit($id)
     {
-
-        $data = $this->category->edit($id);
+        $data = $this->category->findById($id);
         return view('backend.category.edit',compact('data'));
     }
 
 
     public function update(CategoryValidationRequest $request, $id)
     {
-        $data = [
-            'name'=>$request->category,
-            'updated_at'=>Carbon::now()
-        ];
-        $this->category->update($data,$id);
+        $data = $this->categoryService->prepareData($request->except('_token'));
+        $this->category->update($id,$data);
         return redirect()->route('category.index') ->with('success','Category Updated Successfully');
     }
 

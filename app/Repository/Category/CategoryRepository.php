@@ -17,7 +17,7 @@ class CategoryRepository extends BaseRepository implements CategoryInterface,Bas
         $this->category = $category;
     }
 
-    public function  getAllActiveCategory(){
+    public function  getActiveCategory(){
         return $this->category->orderBy('id', 'desc')->get();
 
     }
