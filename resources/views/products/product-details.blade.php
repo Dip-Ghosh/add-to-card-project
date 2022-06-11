@@ -240,7 +240,6 @@
                 <div class='col-xs-12 col-sm-12 col-md-9 rht-col'>
                     <div class="detail-block">
                         <div class="row">
-
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 gallery-holder">
                                 <div class="product-item-holder size-big single-product-gallery small-gallery">
                                     <div class="single-product-gallery-thumbs gallery-thumbs">
@@ -352,7 +351,7 @@
 
                                             <div class="add-btn">
                                                 <a  id="add-to-card" data-id="{{ $product->id }}" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
-                                                <a  href="{{ route('products.cart') }}" style="display: none" id="go-to-cart" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> GO TO CART</a>
+                                                <a  href="{{ route('products.carts.show') }}" style="display: none" id="go-to-cart" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> GO TO CART</a>
                                             </div>
 
 
@@ -412,14 +411,14 @@
             e.preventDefault();
             var id = $(this).data('id');
             var qty = $('#qty').val();
-            console.log(qty);
+            var url = "{{url('/products/carts')}}" +'/' + parseInt(id);
 
             $.ajax({
-                url: '{{ url('add-to-cart') }}' + '/' + id ,
+                url: url,
                 method: "GET",
                 data: {
                     _token: '{{ csrf_token() }}',
-                    'qty' : qty
+                    'qty' : parseInt(qty)
                 },
                 success: function (response) {
                     $('#add-to-card').hide();

@@ -38,9 +38,9 @@ class HomeController extends Controller
         return view('main',compact('categories','data'));
     }
 
-    public function getProdcutDetails($id)
+    public function getProduct($id)
     {
-        $product = $this->product->getProductById($id);
+        $product = $this->product->findById($id);
         return view('products.product-details',compact('product'));
     }
 
@@ -49,25 +49,27 @@ class HomeController extends Controller
         return view('products.shopping-cart');
     }
 
-    public function addToCart( Request $request,$id)
+    public function add($id,Request $request)
     {
-        $product = $this->product->getProductById($id);
+        $product = $this->product->findById(intval($id));
         $product->quantity = $request->qty;
         $this->homeService->addItemToCart($product,$id);
+        return session()->flash('success', 'Product added to cart successfully');
     }
 
-    public function updateToCart(Request $request)
+    public function update(Request $request,$id)
     {
-        if($request->id && $request->quantity){
-
+        if(intval($id) && $request->quantity){
             $this->homeService->updateToCart($request);
+            session()->flash('success', 'Cart updated successfully');
         }
     }
 
-    public function removeFromCart(Request $request)
+    public function remove($id)
     {
-        if($request->id){
-            $this->homeService->removeItemFromCart($request);
+        if(intval($id)){
+            $this->homeService->removeItemFromCart(intval($id));
+            return session()->flash('success', 'Product removed from cart successfully');
         }
     }
 

@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="product-info text-left m-t-20">
-                            <h3 class="name"><a href="{{ url('/products/details') }}">Floral Print Buttoned</a></h3>
+                            <h3 class="name"><a href="">Floral Print Buttoned</a></h3>
                             <div class="rating rateit-small"></div>
                             <div class="product-price"><span class="price"> $600.00 </span> <span
                                     class="price-before-discount">$800.00</span>

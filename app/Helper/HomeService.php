@@ -9,7 +9,6 @@ class HomeService
     {
         $cart = session()->get('cart', []);
 
-
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] += $product['quantity'];
         }
@@ -22,25 +21,20 @@ class HomeService
             ];
         }
         session()->put('cart', $cart);
-        return session()->flash('success', 'Product add successfully');
     }
 
-    public function removeItemFromCart($request)
+    public function removeItemFromCart($id)
     {
-
         $cart = session()->get('cart');
-        if (isset($cart[$request->id])) {
-            unset($cart[$request->id]);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
             session()->put('cart', $cart);
         }
-        return session()->flash('success', 'Product removed successfully');
-
     }
 
     public function updateToCart($request){
         $cart = session()->get('cart');
-        $cart[$request->id]["quantity"] = $request->quantity;
+        $cart[$request->id]["quantity"] = ($request->quantity > 0) ? $request->quantity : 1;
         session()->put('cart', $cart);
-        session()->flash('success', 'Cart updated successfully');
     }
 }

@@ -13,14 +13,25 @@ $namespace ='App\Http\Controllers';
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/login',$namespace.'\HomeController@register')->name('login');
+Route::get('login',$namespace.'\HomeController@register')->name('login');
 Route::get('/',$namespace.'\HomeController@index')->name('home');
-Route::get('/details/{id}',$namespace.'\HomeController@getProdcutDetails')->name('products.details');
-Route::get('/carts',$namespace.'\HomeController@getCart')->name('products.cart');
-Route::get('/cart/{id}', $namespace.'\HomeController@addToCart')->name('add.to.cart');
-Route::post('update-cart', $namespace.'\HomeController@updateToCart')->name('update.cart');
 
-Route::delete('remove-from-cart', $namespace.'\HomeController@removeFromCart')->name('remove.from.cart');
+
+Route::group(['prefix'=>'products','as'=>'products.'], function() use ($namespace) {
+
+    Route::get('/{id}',$namespace.'\HomeController@getProduct')->name('details');
+
+    Route::group(['prefix'=>'carts','as'=>'carts.'], function() use ($namespace) {
+
+        Route::get('/show',$namespace.'\HomeController@getCart')->name('show');
+        Route::get('/{id}', $namespace.'\HomeController@add')->name('add');
+        Route::patch('/{id}', $namespace.'\HomeController@update')->name('update');
+        Route::delete('/{id}', $namespace.'\HomeController@remove')->name('destroy');
+
+    });
+
+});
+
 
 Route::resource('category',$namespace.'\CategoryController');
 Route::resource('products',$namespace.'\ProductController');

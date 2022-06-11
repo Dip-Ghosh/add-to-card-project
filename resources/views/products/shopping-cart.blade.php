@@ -32,7 +32,7 @@
                                                         class="fa fa-trash-o"></i></a></td>
                                             <td class="cart-image">
                                                 <a class="entry-thumbnail">
-                                                    <img src="{{asset('upload/'.$details['image'])}}" alt="">
+                                                    <img src="{{asset('/upload/'.$details['image'])}}" alt="">
                                                 </a>
                                             </td>
                                             <td class="cart-product-name-info">
@@ -302,16 +302,16 @@
 
         $(".remove-from-cart").click(function (e) {
             e.preventDefault();
-
             var id = $(this).data('id');
+            var url = " {{url('/products/carts/')}}" + '/' + parseInt(id);
 
             if(confirm("Are you sure want to remove?")) {
                 $.ajax({
-                    url: '{{ route('remove.from.cart') }}',
+                    url: url,
                     method: "DELETE",
                     data: {
                         _token: '{{ csrf_token() }}',
-                        id: id
+                        'id': parseInt(id)
                     },
                     success: function (response) {
                         window.location.reload();
@@ -326,14 +326,14 @@
 
             var id = $(this).data('id');
             var qty = $(this).val();
+            var url = "{{ url('/products/carts') }}" + '/' + parseInt(id);
 
             $.ajax({
-                url: '{{ route('update.cart') }}',
-                method: "POST",
+                url: url ,
+                method: "PATCH",
                 data: {
                     _token: '{{ csrf_token() }}',
-                    id: id,
-                    quantity: qty
+                    quantity: parseInt(qty)
                 },
                 success: function (response) {
                     window.location.reload();

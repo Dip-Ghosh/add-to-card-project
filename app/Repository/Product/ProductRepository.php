@@ -29,10 +29,6 @@ class ProductRepository extends BaseRepository implements ProductInterface,BaseI
 
     }
 
-    public function getProductById($id){
-
-        return $this->product->where('id', $id)->first();
-    }
 
 
 }

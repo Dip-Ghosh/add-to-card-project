@@ -8,7 +8,7 @@ interface BaseInterface
 
     public function findById($id);
 
-    public function update(array $data, $id);
+    public function update($id,$data);
 
     public function delete($id);
 }
