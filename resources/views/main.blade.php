@@ -5,8 +5,15 @@
             <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
             <nav class="yamm megamenu-horizontal">
                 <ul class="nav">
-                    <li class="dropdown menu-item"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                                class="icon fa fa-envira"></i>Home and Garden</a></li>
+                    @if(isset($categories) && !empty($categories))
+                        @foreach($categories as $category)
+                            <li class="dropdown menu-item"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="icon fa fa-envira"></i>{{ $category->name }}</a></li>
+                            @endforeach
+
+                    @else
+                        <li> No record Found</li>
+                    @endif
                 </ul>
             </nav>
         </div>

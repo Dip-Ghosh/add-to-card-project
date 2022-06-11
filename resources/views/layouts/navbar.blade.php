@@ -32,11 +32,15 @@
                                 <ul class="categories-filter animate-dropdown">
                                     <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
                                         <ul class="dropdown-menu" role="menu" >
-                                            <li class="menu-header">Computer</li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Clothing</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Electronics</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Shoes</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Watches</a></li>
+                                            @if(isset($categories) && !empty($categories))
+                                                @foreach($categories as $category)
+                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- {{ $category->name }}</a></li>
+                                                @endforeach
+
+                                            @else
+                                                <li> No record Found</li>
+                                            @endif
+
                                         </ul>
                                     </li>
                                 </ul>

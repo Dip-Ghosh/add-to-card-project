@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
+$namespace ='App\Http\Controllers';
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
+Route::get('/',$namespace.'\HomeController@index');
+
 
 Route::get('/products/details',function () {
     return view('products.product-details');
 });
+
+Route::resource('category',$namespace.'\CategoryController');
+Route::resource('products',$namespace.'\ProductController');
+
