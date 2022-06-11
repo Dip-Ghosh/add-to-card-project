@@ -108,7 +108,6 @@
 
             @foreach($data as $key=>$product)
 
-
                 <div class="more-info-tab clearfix ">
                     <h3 class="new-product-title pull-left">{{ $key }}</h3>
                 </div>
@@ -117,9 +116,7 @@
                         <div class="product-slider">
                             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
 
-
                                 @foreach($product as $value)
-
                                     <div class="item item-carousel">
                                         <div class="products">
                                             <div class="product">
@@ -132,8 +129,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-info text-left">
-                                                    <h3 class="name"><a href="{{  route('products.details',$value->id) }}">Floral Print
-                                                            Buttoned</a></h3>
+                                                    <h3 class="name"><a href="{{  route('products.details',$value->id) }}"> {{ $value->name }}</a></h3>
                                                     <div class="rating rateit-small"></div>
                                                     <div class="description"></div>
                                                     <div class="product-price"><span class="price"> {{ $value->price }} </span> <span
@@ -158,7 +154,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-
 
                             </div>
                         </div>

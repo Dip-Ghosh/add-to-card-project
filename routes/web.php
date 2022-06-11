@@ -13,10 +13,13 @@ $namespace ='App\Http\Controllers';
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/login',$namespace.'\HomeController@register')->name('login');
 Route::get('/',$namespace.'\HomeController@index');
-Route::get('details/{id}',$namespace.'\HomeController@getProdcutDetails')->name('products.details');
-
+Route::get('/details/{id}',$namespace.'\HomeController@getProdcutDetails')->name('products.details');
+Route::get('/cart',$namespace.'\HomeController@getCart')->name('products.cart');
+Route::get('add-to-cart/{id}', $namespace.'\HomeController@addToCart')->name('add.to.cart');
+Route::patch('update-cart', $namespace.'\HomeController@update')->name('update.cart');
+Route::delete('remove-from-cart', $namespace.'\HomeController@remove')->name('remove.from.cart');
 
 Route::resource('category',$namespace.'\CategoryController');
 Route::resource('products',$namespace.'\ProductController');
