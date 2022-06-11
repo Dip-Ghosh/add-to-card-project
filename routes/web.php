@@ -19,7 +19,8 @@ Route::get('/details/{id}',$namespace.'\HomeController@getProdcutDetails')->name
 Route::get('/cart',$namespace.'\HomeController@getCart')->name('products.cart');
 Route::get('add-to-cart/{id}', $namespace.'\HomeController@addToCart')->name('add.to.cart');
 Route::patch('update-cart', $namespace.'\HomeController@update')->name('update.cart');
-Route::delete('remove-from-cart', $namespace.'\HomeController@remove')->name('remove.from.cart');
+
+Route::delete('remove-from-cart', $namespace.'\HomeController@removeFromCart')->name('remove.from.cart');
 
 Route::resource('category',$namespace.'\CategoryController');
 Route::resource('products',$namespace.'\ProductController');

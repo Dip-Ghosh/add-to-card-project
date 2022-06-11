@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\HomeService;
 use App\Models\Product;
 use App\Repository\Category\CategoryInterface;
 use App\Repository\Product\ProductInterface;
@@ -11,11 +12,14 @@ class HomeController extends Controller
 {
     protected $category;
     protected $product;
+    protected $homeService;
 
-    public function __construct( CategoryInterface $category,ProductInterface $product){
+    public function __construct( CategoryInterface $category,ProductInterface $product,HomeService $homeService){
 
         $this->category = $category;
         $this->product = $product;
+        $this->homeService = $homeService;
+
     }
 
     public function index(){
@@ -47,23 +51,9 @@ class HomeController extends Controller
 
     public function addToCart( Request $request,$id)
     {
-        $product = Product::findOrFail($id);
-
-        $cart = session()->get('cart', []);
-
-
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "quantity" => isset($request->qty) ? $request->qty : 1,
-                "price" => $product->price,
-                "image" => $product->image
-            ];
-        }
-
-        session()->put('cart', $cart);
+        $product = $this->product->getProductById($id);
+        $product->quantity = $request->qty;
+        $this->homeService->addItemToCart($product,$id);
     }
 
     public function update(Request $request)
@@ -75,15 +65,11 @@ class HomeController extends Controller
             session()->flash('success', 'Cart updated successfully');
         }
     }
-    public function remove(Request $request)
+
+    public function removeFromCart(Request $request)
     {
-        if($request->id) {
-            $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
-                unset($cart[$request->id]);
-                session()->put('cart', $cart);
-            }
-            session()->flash('success', 'Product removed successfully');
+        if($request->id){
+            $this->homeService->removeItemFromCart($request);
         }
     }
 
