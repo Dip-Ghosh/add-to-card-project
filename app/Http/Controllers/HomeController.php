@@ -64,9 +64,6 @@ class HomeController extends Controller
         }
 
         session()->put('cart', $cart);
-     exit;
-//        return redirect($cart);
-//        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
     public function update(Request $request)

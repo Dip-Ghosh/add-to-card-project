@@ -17,17 +17,18 @@
                                     <th class="cart-sub-total item">Subtotal</th>
                                     <th class="cart-total last-item">Grandtotal</th>
                                 </tr>
-                                </thead><!-- /thead -->
+                                </thead>
 
 
                                 <tbody>
                                 @php
+
                                 $sum = 0;
                                 @endphp
                                 @if(session('cart'))
                                     @foreach(session('cart') as $id => $details)
                                         <tr>
-                                            <td class="romove-item"><a href="#" title="cancel" class="icon"><i
+                                            <td data-id=" {{ $id }}" class="remove-from-cart"><a href="#" title="cancel" class="icon"><i
                                                         class="fa fa-trash-o"></i></a></td>
                                             <td class="cart-image">
                                                 <a class="entry-thumbnail" href="detail.html">
@@ -77,7 +78,7 @@
                                     <td colspan="7">
                                         <div class="shopping-cart-btn">
 							<span class="">
-								<a href="#" class="btn btn-upper btn-primary outer-left-xs">Continue Shopping</a>
+								<a href="{{route('home')}}" class="btn btn-upper btn-primary outer-left-xs">Continue Shopping</a>
 								<a href="#" class="btn btn-upper btn-primary pull-right outer-right-xs">Update shopping cart</a>
 							</span>
                                         </div><!-- /.shopping-cart-btn -->
@@ -188,9 +189,10 @@
                             </tr>
                             </tbody><!-- /tbody -->
                         </table><!-- /table -->
-                    </div><!-- /.cart-shopping-total -->            </div><!-- /.shopping-cart -->
-            </div> <!-- /.row -->
-            <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+                    </div>
+                </div>
+            </div>
+
             <div id="brands-carousel" class="logo-slider wow fadeInUp">
 
                 <div class="logo-slider-inner">
@@ -257,9 +259,9 @@
                     </div><!-- /.owl-carousel #logo-slider -->
                 </div><!-- /.logo-slider-inner -->
 
-            </div><!-- /.logo-slider -->
-            <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
-        </div><!-- /.container -->
+            </div>
+
+        </div>
     </div>
 
     <div class="row our-features-box">
@@ -295,4 +297,26 @@
             </ul>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+
+            if(confirm("Are you sure want to remove?")) {
+                $.ajax({
+                    url: '{{ route('remove.from.cart') }}',
+                    method: "DELETE",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: id
+                    },
+                    success: function (response) {
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

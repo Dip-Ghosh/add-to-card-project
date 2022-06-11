@@ -14,7 +14,7 @@ $namespace ='App\Http\Controllers';
 |
 */
 Route::get('/login',$namespace.'\HomeController@register')->name('login');
-Route::get('/',$namespace.'\HomeController@index');
+Route::get('/',$namespace.'\HomeController@index')->name('home');
 Route::get('/details/{id}',$namespace.'\HomeController@getProdcutDetails')->name('products.details');
 Route::get('/cart',$namespace.'\HomeController@getCart')->name('products.cart');
 Route::get('add-to-cart/{id}', $namespace.'\HomeController@addToCart')->name('add.to.cart');

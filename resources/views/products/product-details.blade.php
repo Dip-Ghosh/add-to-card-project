@@ -406,8 +406,6 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
 
     <script>
         $("#add-to-card").click(function(e) {
@@ -434,16 +432,6 @@
 
         });
 
-        $(document).ready(function() {
-            $(".removefromcart").click(function(e) {
-                e.preventDefault();
-                var selct_ = $(this) //declare this
-
-                selct_.closest('.content').find('.addtocart').show();
-                selct_.closest('.content').find('.removefromcart').hide();
-
-            });
-        });
     </script>
 
 @endsection
